@@ -34,8 +34,8 @@ def list_boxes() -> str:
         Returns:
             str: HTML list of all boxes and number of balls in them
     """
-    response = "<p>Hello! We have following boxes here:</p>"
-    response += "<ul>"
+    response = "<p>Hello! We have following boxes here:</p>" + "<ul>"
+
     for color, balls in boxes.items():
         response += "<li>{} has {} balls</li>".format(color,balls)
     response += "</ul>"
@@ -49,23 +49,22 @@ def manage_box(color) -> str:
         Returns:
             str: message confirming operation or number of balls in a box
     """
-    if request.method == 'POST':
-        if color in boxes:
-            return "Box '{}' already exists! Delete it first.".format(color)
-        else:
-            boxes[color] = 0
-            return "Empty box '{}' created.".format(color)
-    elif request.method == 'DELETE':
-        if color in boxes:
-            boxes.pop(color)
-            return "Box '{}' deleted.".format(color)
-        else:
+    if request.method == 'DELETE':
+        if color not in boxes:
             return "Cannot delete box '{}'. No such box.".format(color)
+        boxes.pop(color)
+        return "Box '{}' deleted.".format(color)
     elif request.method == 'GET':
         if color in boxes:
             return "Box '{}' contains {} balls.".format(color, boxes[color])
         else:
             return "No box '{}'! Create it first".format(color)
+
+    elif request.method == 'POST':
+        if color in boxes:
+            return "Box '{}' already exists! Delete it first.".format(color)
+        boxes[color] = 0
+        return "Empty box '{}' created.".format(color)
 
 @app.route('/box/<string:color>/<int:balls>', methods=['PUT'])
 def store_balls(color, balls) -> str:
@@ -75,11 +74,10 @@ def store_balls(color, balls) -> str:
         Returns:
             str: message confirming operation
     """
-    if color in boxes:
-        boxes[color] = balls
-        return "Box '{}' contains {} balls.".format(color, balls)
-    else:
+    if color not in boxes:
         return "No box '{}'! Create it first".format(color)
+    boxes[color] = balls
+    return "Box '{}' contains {} balls.".format(color, balls)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

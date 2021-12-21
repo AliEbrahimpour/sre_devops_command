@@ -6,17 +6,13 @@ class appilication():
         self.record=record
         self.push=link
         self.filePath(name)
-        if option=="add":
-            if self.fileExist:
-                for i in link:
-                    self.push.append(i)
-        if option=="delete":
-            pass
+        if option == "add" and self.fileExist:
+            for i in link:
+                self.push.append(i)
 
     def readConfig(self):
-        f=open(self.filePath,"r")
-        content=f.read().splitlines()
-        f.close()
+        with open(self.filePath,"r") as f:
+            content=f.read().splitlines()
         for line in content:
             if "application" in line:
                 self.name=line.split(" ")[1][:-1]
@@ -35,11 +31,10 @@ class appilication():
         else:
             self.fileExist=False
     def createFile(self):
-        f=open(self.filePath,"+w")
-        f.write("application %s {\n"%self.name)
-        f.write("live %s;\n"%self.live)
-        f.write("record %s;\n"%self.record)
-        for line in self.push:
-            f.write("push %s;\n"%line)
-        f.write("}\n")
-        f.close()
+        with open(self.filePath,"+w") as f:
+            f.write("application %s {\n"%self.name)
+            f.write("live %s;\n"%self.live)
+            f.write("record %s;\n"%self.record)
+            for line in self.push:
+                f.write("push %s;\n"%line)
+            f.write("}\n")

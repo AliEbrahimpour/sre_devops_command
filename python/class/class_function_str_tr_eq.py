@@ -34,7 +34,7 @@ r2 = Rectangle(10,20)
 
 # print(r1.to_string())
 
-print(str(r1))
+print(r1)
 print(r1)
 
 

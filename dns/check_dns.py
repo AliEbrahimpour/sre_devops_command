@@ -6,7 +6,7 @@ def check_nameserver(domain):
         nameServers =[{'name_server': 'cdn1.example.com', 'ip': '251.251.251.251'}, {'name_server': 'cdn1.example.com', 'ip': '251.251.251.251'}]
         flag=True
         resolver=dns.resolver.Resolver()
-        for i in range(3):
+        for _ in range(3):
             if flag:
                 flag=False
                 for name in nameserver:
@@ -18,8 +18,8 @@ def check_nameserver(domain):
                         names=[]
                     if len([ '1' for name in names if name in [server['name_server'] for server in nameServers]])!=len(nameServers) or len(nameServers)!=len(names):
                         flag=True
-       
-        return not flag 
+
+        return not flag
     except Exception as e:
         return False
     return False

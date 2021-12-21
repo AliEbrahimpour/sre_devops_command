@@ -62,10 +62,7 @@ def db_list_boxes() -> Dict[str, int]:
         None
     Returns: Dictionary representing boxes in database
     """
-    boxes = {}
-    for row in SESSION.query(ColorBox).all():
-        boxes[row.color] = row.balls
-    return boxes
+    return {row.color: row.balls for row in SESSION.query(ColorBox).all()}
 
 def db_get_box(color: str) -> (bool, int):
     """
@@ -116,13 +113,11 @@ def db_create_box(color: str) -> bool:
                           False if box with given color already exists in Database
     """
     if SESSION.query(ColorBox).filter(ColorBox.color == color).count() > 0:
-        status = False
-    else:
-        box = ColorBox(color=color, balls=0)
-        SESSION.add(box)
-        SESSION.commit()
-        status = True
-    return status
+        return False
+    box = ColorBox(color=color, balls=0)
+    SESSION.add(box)
+    SESSION.commit()
+    return True
 
 def db_delete_box(color: str) -> bool:
     """

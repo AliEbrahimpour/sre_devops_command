@@ -37,7 +37,7 @@ class Authonticate():
         return "https://ip:port/v3/auth/tokens"
 
     def getToken(self):
-        if self.expire_time==None or self.expire_time < time.time():
+        if self.expire_time is None or self.expire_time < time.time():
             body=self.getRequestBody()
             header= {"Content-Type":"application/json"}
             r = requests.post(self.getURL(),headers=header, data = body,verify=False)

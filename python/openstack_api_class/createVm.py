@@ -20,10 +20,14 @@ class CreateInstance():
     def create(self):
         self.auth=Authonticate("user","pass")
         print(self.auth.getToken())
-        mInstance=[]
-        for i in range(self.instance_number):
-            mInstance.append(ThreadingSSH(self.flavor_ids, self.network_ids,self.auth,self.image_ids))
-        for i in range(800):
+        mInstance = [
+            ThreadingSSH(
+                self.flavor_ids, self.network_ids, self.auth, self.image_ids
+            )
+            for _ in range(self.instance_number)
+        ]
+
+        for _ in range(800):
             time.sleep(1)
         
 

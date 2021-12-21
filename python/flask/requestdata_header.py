@@ -11,9 +11,8 @@ def api_message():
         return "JSON Message: " + json.dumps(request.json)
 
     elif request.headers['Content-Type'] == 'application/octet-stream':
-        f = open('./binary', 'wb')
-        f.write(request.data)
-        f.close()
+        with open('./binary', 'wb') as f:
+            f.write(request.data)
         return "Binary message written!"
 
     else:

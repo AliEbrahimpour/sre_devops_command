@@ -74,11 +74,7 @@ str = (f"curl -v {link} -H \'accept: */*"
 stream = os.popen(str)
 output = stream.readlines()
 
-# print(output)
-
-
-file1 = open("myfile.txt","w")
-L = output
-file1.writelines(L)
-file1.close()
+with open("myfile.txt","w") as file1:
+    L = output
+    file1.writelines(L)
   
