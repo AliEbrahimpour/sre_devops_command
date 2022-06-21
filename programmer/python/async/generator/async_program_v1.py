@@ -9,7 +9,7 @@ def main():
 
     loop= asyncio.get_event_loop()
     t0 = datetime.datetime.now()
-    print(colorama.Fore.WHITE + "App started.", flush=True)
+    print(f"{colorama.Fore.WHITE}App started.", flush=True)
     data=asyncio.Queue()
 
     task1 = loop.create_task(generate_data(20,data))
@@ -26,11 +26,11 @@ def main():
 
 
 async def generate_data(num: int, data: asyncio.Queue):
-    for idx in range(0, num +1):
+    for idx in range(num +1):
         item = idx*idx
         await data.put((item, datetime.datetime.now()))
 
-        print(colorama.Fore.YELLOW + f" --generated item {idx}", flush=True)
+        print(f"{colorama.Fore.YELLOW} --generated item {idx}", flush=True)
         await asyncio.sleep(random.random() + .5)
 
 

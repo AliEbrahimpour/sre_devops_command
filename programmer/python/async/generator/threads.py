@@ -39,7 +39,7 @@ def main():
 
 def greeter(name: str, times: int):
     for _ in range(times):
-        print("Hello there {}".format(name))
+        print(f"Hello there {name}")
         time.sleep(1)
 
 if __name__ == "__main__":

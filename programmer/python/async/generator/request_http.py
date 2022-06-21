@@ -15,11 +15,16 @@ def main():
 
 
     for url in urls:
-        print('Getting tittle from {}'.format(url.replace('https','')),end='....',flush=True)
+        print(
+            f"Getting tittle from {url.replace('https', '')}",
+            end='....',
+            flush=True,
+        )
+
 
         title = get_title(url)
-        print("{}".format(title),flush=True) 
-    
+        print(f"{title}", flush=True) 
+
     print("Done",flush=True)
 
 

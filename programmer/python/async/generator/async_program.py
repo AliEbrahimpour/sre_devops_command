@@ -6,7 +6,7 @@ import time
 
 def main():
     t0 = datetime.datetime.now()
-    print(colorama.Fore.WHITE + "App started.", flush=True)
+    print(f"{colorama.Fore.WHITE}App started.", flush=True)
     data=[]
 
     generate_data(20,data)
@@ -19,11 +19,11 @@ def main():
 
 
 def generate_data(num: int, data: list):
-    for idx in range(0, num +1):
+    for idx in range(num +1):
         item = idx*idx
         data.append((item, datetime.datetime.now()))
 
-        print(colorama.Fore.YELLOW + f" --generated item {idx}", flush=True)
+        print(f"{colorama.Fore.YELLOW} --generated item {idx}", flush=True)
         time.sleep(random.random() + .5)
 
 

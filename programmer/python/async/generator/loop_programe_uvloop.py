@@ -23,7 +23,10 @@ def main():
     loop.run_until_complete(final_task)
 
     dt = datetime.datetime.now() -t0
-    print(colorama.Fore.WHITE + f"App exiting, total time: {dt.total_seconds():,.2f} sec.", flush=True)
+    print(
+        f"{colorama.Fore.WHITE}App exiting, total time: {dt.total_seconds():,.2f} sec.",
+        flush=True,
+    )
 
 
 async def generate_data(num: int, data: asyncio.Queue):

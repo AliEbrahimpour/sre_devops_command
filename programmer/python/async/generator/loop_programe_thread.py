@@ -7,9 +7,8 @@ import threading
 
 def main():
     t0 = datetime.datetime.now()
-    print(colorama.Fore.WHITE + "App started.", flush=True)
+    print(f"{colorama.Fore.WHITE}App started.", flush=True)
     data=[]
-
 # create thread
     threads = [
         threading.Thread(target=generate_data,args=(20,data)),
@@ -25,9 +24,9 @@ def main():
     print("Started...")
     # other work while generate_data is running ................
     # Wait for completion
-    
 
-    while any([t.is_alive() for t in threads]):
+
+    while any(t.is_alive() for t in threads):
         [t.join(.001) for t in threads]
         if not abort_thread.is_alive():
             print("Cancelling on your request!", flush=True)
@@ -39,14 +38,14 @@ def main():
 
 
 def check_cancel():
-    print(colorama.Fore.RED + "Press enter to cancel...",flush=True)
+    print(f"{colorama.Fore.RED}Press enter to cancel...", flush=True)
     input()
 def generate_data(num: int, data: list):
-    for idx in range(0, num +1):
+    for idx in range(num +1):
         item = idx*idx
         data.append((item, datetime.datetime.now()))
 
-        print(colorama.Fore.YELLOW + f" --generated item {idx}", flush=True)
+        print(f"{colorama.Fore.YELLOW} --generated item {idx}", flush=True)
         time.sleep(random.random() + .5)
 
 

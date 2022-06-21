@@ -7,11 +7,8 @@ from flasgger.utils import swag_from
 #--------------------
 
 def add_2_numbers(num1,num2):
-    output = {"sum_of_number": 0}
     sum_of_2_numbers = num1 + num2
-    output["sum_of_numbers"] = sum_of_2_numbers
-
-    return output
+    return {"sum_of_number": 0, "sum_of_numbers": sum_of_2_numbers}
 
 
 app = Flask(__name__)
@@ -50,7 +47,7 @@ def add_numbers():
         res = add_2_numbers(num1, num2)
     except:
         res = {"success": False, "message": "Unknown error"}
-    
+
     return json.dumps(res)
 
 if __name__ == "__main__":

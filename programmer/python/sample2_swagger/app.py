@@ -40,11 +40,7 @@ def get_info(type):
     "4legs":["cat","dog","horse"],
     "2legs":["chocken","duck","monkey"]}
 
-    if type == "all":
-        result = zoo
-    else:
-        result = zoo.get(type)
-    
+    result = zoo if type == "all" else zoo.get(type)
     return jsonify(result)
 
 
