@@ -1,4 +1,4 @@
 import os
-print("Hello %s %s" % (os.environ['NAME'], os.environ['FAMILY']))
+print(f"Hello {os.environ['NAME']} {os.environ['FAMILY']}")
 
 
