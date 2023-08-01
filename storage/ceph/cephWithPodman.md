@@ -89,5 +89,14 @@ ssh infra3 sudo chown cinder:cinder /etc/ceph/ceph.client.cinder-backup.keyring
                 caps osd = "allow *"
 ```
 
+---
+##  Setup  Openstack Ansible
+```
+cd /opt/openstack-ansible/playbooks/
+openstack-ansible setup-hosts.yml
+openstack-ansible os-cinder-install.yml 
+openstack-ansible os-nova-install.yml
+openstack-ansible os-horizon-install.yml
+```
 
 
